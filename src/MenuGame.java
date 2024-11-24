@@ -133,7 +133,4 @@ public class MenuGame extends JFrame {
 			throw new IllegalArgumentException("Unexpected value: " + action);
 		}
 	}
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(MenuGame::new);
-	}
 }
