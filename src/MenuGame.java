@@ -19,7 +19,7 @@ public class MenuGame extends JFrame {
 		setMinimumSize(new Dimension(800, 600));
 		
 		initiallizeTitlePanel();
-		initiallizeDifficultyPanel();
+		initializeDifficultyPanel();
 		initializeControlPanel();
 		
 		pack();
@@ -40,43 +40,56 @@ public class MenuGame extends JFrame {
 
 	}
 
-	private void initiallizeDifficultyPanel() {
-		panelDifficulty = new JPanel() ;
-		panelDifficulty.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10));
-		panelDifficulty.setBackground(new Color(230, 230, 250));
-		 panelDifficulty.setBorder(BorderFactory.createTitledBorder(
-	                BorderFactory.createLineBorder(new Color(0, 0, 128), 2),
-	                "Select Difficulty Level",
-	                0,
-	                0,
-	                new Font("Arial", Font.BOLD, 20),
-	                new Color(0, 0, 128)
-	        ));
-		difficultyGroup = new ButtonGroup();
-		
-		rbEasy = createDifficultyRadioButton("Easy", new Color(144, 238, 144)); 
-		rbMedium = createDifficultyRadioButton("Medium", new Color(255, 223, 186)); 
-		rbHard = createDifficultyRadioButton("Hard", new Color(255, 99, 71));
-		
-		difficultyGroup.add(rbEasy); 
-		difficultyGroup.add(rbMedium); 
-		difficultyGroup.add(rbHard); 
-		
-		panelDifficulty.add(rbEasy);
-		panelDifficulty.add(rbMedium);
-		panelDifficulty.add(rbHard);
+	private void initializeDifficultyPanel() {
+	    panelDifficulty = new JPanel(new GridLayout(1, 3, 10, 10)); // Sử dụng GridLayout
+	    panelDifficulty.setBackground(new Color(230, 230, 250));
 
-		getContentPane().add(panelDifficulty,BorderLayout.CENTER);
+	    // Tạo border đẹp hơn
+	    Border outerBorder = BorderFactory.createLineBorder(new Color(0, 0, 128), 4); // Viền ngoài màu xanh đậm
+	    Border innerBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20); // Padding bên trong
+	    Border titledBorder = BorderFactory.createTitledBorder(
+	            outerBorder, 
+	            "Select Difficulty Level", 
+	            0,
+	            0, 
+	            new Font("Arial", Font.BOLD, 20), 
+	            new Color(0, 0, 128) 
+	    );
+	    panelDifficulty.setBorder(BorderFactory.createCompoundBorder(titledBorder, innerBorder));
+
+	    difficultyGroup = new ButtonGroup();
+
+	    // Tạo các nút radio với màu sắc đẹp mắt
+	    rbEasy = createDifficultyRadioButton("Easy", new Color(144, 238, 144));
+	    rbMedium = createDifficultyRadioButton("Medium", new Color(255, 223, 186));
+	    rbHard = createDifficultyRadioButton("Hard", new Color(255, 99, 71));
+
+	    difficultyGroup.add(rbEasy);
+	    difficultyGroup.add(rbMedium);
+	    difficultyGroup.add(rbHard);
+
+	    // Thêm các radio button vào panel
+	    panelDifficulty.add(rbEasy);
+	    panelDifficulty.add(rbMedium);
+	    panelDifficulty.add(rbHard);
+
+	    getContentPane().add(panelDifficulty, BorderLayout.CENTER);
 	}
-	private JRadioButton createDifficultyRadioButton(String text , Color color ) {
-		JRadioButton radioButton = new JRadioButton(text) ; 
-		radioButton.setFont(new Font("Arial", Font.BOLD, 18));
-		radioButton.setBackground(color); 
-		radioButton.setPreferredSize(new Dimension(150,50));
-		
-		return radioButton;
-		
+	private JRadioButton createDifficultyRadioButton(String text, Color color) {
+	    JRadioButton radioButton = new JRadioButton(text);
+	    radioButton.setFont(new Font("Arial", Font.BOLD, 20)); // Font lớn và đậm
+	    radioButton.setBackground(color); // Màu nền
+	    radioButton.setHorizontalAlignment(SwingConstants.CENTER); // Canh giữa nội dung
+	    radioButton.setFocusPainted(false); // Loại bỏ viền focus mặc định
+
+	    // Thêm viền đẹp mắt
+	    Border outerBorder = BorderFactory.createLineBorder(Color.BLACK, 2); // Viền ngoài màu đen
+	    Border innerBorder = BorderFactory.createEmptyBorder(10, 15, 10, 15); // Padding bên trong
+	    radioButton.setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder)); // Kết hợp viền
+
+	    return radioButton;
 	}
+	
 	
 	private void initializeControlPanel() {
 		panelControl = new JPanel(new GridLayout(1, 5, 10, 10) ) ;
