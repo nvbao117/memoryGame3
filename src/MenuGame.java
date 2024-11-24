@@ -28,12 +28,12 @@ public class MenuGame extends JFrame {
 
 	private void initiallizeTitlePanel() {
 		panelTitle = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		panelTitle.setBackground(Color.YELLOW);
+		panelTitle.setBackground(new Color(50, 50, 100));
 
 		JLabel labelTitle = new JLabel("Memory Game");
-		labelTitle.setFont(new Font("Arial", Font.BOLD, 32));
-		labelTitle.setForeground(Color.BLUE);
-		Border border = BorderFactory.createLineBorder(Color.BLACK, 4);
+		labelTitle.setFont(new Font("Comic Sans MS", Font.BOLD, 36));
+		labelTitle.setForeground(new Color(255, 215, 0));
+		Border border = BorderFactory.createLineBorder(new Color(255, 215, 0), 4);
 		panelTitle.setBorder(border);
 		panelTitle.add(labelTitle);
 		getContentPane().add(panelTitle, BorderLayout.NORTH);
@@ -41,14 +41,22 @@ public class MenuGame extends JFrame {
 	}
 
 	private void initiallizeDifficultyPanel() {
-		panelDifficulty = new JPanel(new FlowLayout(FlowLayout.CENTER,20,20)) ;
-		panelDifficulty.setBackground(Color.pink); 
-		panelDifficulty.setBorder(BorderFactory.createTitledBorder("Select Difficulty Level"));
+		panelDifficulty = new JPanel() ;
+		panelDifficulty.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10));
+		panelDifficulty.setBackground(new Color(230, 230, 250));
+		 panelDifficulty.setBorder(BorderFactory.createTitledBorder(
+	                BorderFactory.createLineBorder(new Color(0, 0, 128), 2),
+	                "Select Difficulty Level",
+	                0,
+	                0,
+	                new Font("Arial", Font.BOLD, 20),
+	                new Color(0, 0, 128)
+	        ));
 		difficultyGroup = new ButtonGroup();
 		
-		rbEasy = createDifficultyRadioButton("Easy", Color.BLUE); 
-		rbMedium = createDifficultyRadioButton("Medium", Color.GREEN); 
-		rbHard = createDifficultyRadioButton("Hard", Color.ORANGE);
+		rbEasy = createDifficultyRadioButton("Easy", new Color(144, 238, 144)); 
+		rbMedium = createDifficultyRadioButton("Medium", new Color(255, 223, 186)); 
+		rbHard = createDifficultyRadioButton("Hard", new Color(255, 99, 71));
 		
 		difficultyGroup.add(rbEasy); 
 		difficultyGroup.add(rbMedium); 
@@ -71,15 +79,15 @@ public class MenuGame extends JFrame {
 	}
 	
 	private void initializeControlPanel() {
-		panelControl = new JPanel(new FlowLayout(FlowLayout.CENTER,20,20) ) ;
-		panelControl.setBackground(Color.orange); 
-		
-		buttonStart = createControlButton("Start"); 
-		buttonLoad = createControlButton("Load"); 
-		buttonBestScore = createControlButton("Best Score"); 
-		buttonResetAll = createControlButton("Reset All"); 
-		buttonExit = createControlButton("Exit");
-		
+		panelControl = new JPanel(new GridLayout(1, 5, 10, 10) ) ;
+		panelControl.setBackground(new Color(245, 245, 245)); 
+        panelControl.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+
+        buttonStart = createControlButton("Start", new Color(50, 205, 50));
+        buttonLoad = createControlButton("Load", new Color(30, 144, 255));
+        buttonBestScore = createControlButton("Best Score", new Color(255, 165, 0));
+        buttonResetAll = createControlButton("Reset All", new Color(220, 20, 60));
+        buttonExit = createControlButton("Exit", new Color(169, 169, 169));
 		
 		panelControl.add(buttonStart); 
 		panelControl.add(buttonLoad); 
@@ -89,12 +97,19 @@ public class MenuGame extends JFrame {
 		
 		getContentPane().add(panelControl, BorderLayout.SOUTH);
 	}
-	private JButton createControlButton(String text) {
-		JButton button = new JButton(text); 
-		button.setFont(new Font("Arial" , Font.BOLD , 18)); 
-		button.addActionListener(e -> controlButtonAction(text) );
-		return button;
-	}
+    private JButton createControlButton(String text, Color color) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.BOLD, 16));
+        button.setBackground(color);
+        button.setForeground(Color.WHITE);
+        button.setFocusPainted(false);
+        button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        button.setPreferredSize(new Dimension(120, 40));
+
+        button.addActionListener(e -> controlButtonAction(text));
+        return button;
+    }
+
 	private void controlButtonAction(String action) {
 		switch (action) {
 		case "Start": {

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
-public class GameManager {
+public class MemoryGameManager {
     private HashMap<ButtonGame, Integer> buttonMap;
     private ButtonGame buttonFirstClicked;
     private ButtonGame buttonSecondClicked;
@@ -20,7 +20,7 @@ public class GameManager {
     private JLabel labelTime;
     private int totalTime;
 
-    public GameManager(JLabel labelTitle, JLabel labelTime) {
+    public MemoryGameManager(JLabel labelTitle, JLabel labelTime) {
         buttonMap = new HashMap<>();
         images = new Images();
         intQtdOpened = 0;

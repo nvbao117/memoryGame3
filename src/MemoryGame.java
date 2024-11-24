@@ -5,7 +5,7 @@ public class MemoryGame extends JFrame {
     private JPanel panelTitle, panelGrid, panelControl;
     private JButton buttonNew, buttonSolve, buttonAbout;
     private JLabel labelTitle, labelTime;
-    private GameManager gameManager;
+    private MemoryGameManager memoryGameManager;
 
 
     public MemoryGame() {
@@ -21,7 +21,7 @@ public class MemoryGame extends JFrame {
 
         pack();
         setVisible(true);
-        gameManager.startGameTimer();
+        memoryGameManager.startGameTimer();
     }
 
     private void initializeTitlePanel() {
@@ -38,7 +38,7 @@ public class MemoryGame extends JFrame {
         panelTitle.setBorder(BorderFactory.createBevelBorder(1));
         getContentPane().add(panelTitle, BorderLayout.NORTH);
 
-        gameManager = new GameManager(labelTitle, labelTime);
+        memoryGameManager = new MemoryGameManager(labelTitle, labelTime);
     }
 
     private void initializeControlPanel() {
@@ -55,8 +55,8 @@ public class MemoryGame extends JFrame {
 
         getContentPane().add(panelControl, BorderLayout.SOUTH);
 
-        buttonNew.addActionListener(e -> gameManager.newGame());
-        buttonSolve.addActionListener(e -> gameManager.solve(false));
+        buttonNew.addActionListener(e -> memoryGameManager.newGame());
+        buttonSolve.addActionListener(e -> memoryGameManager.solve(false));
         buttonAbout.addActionListener(e -> JOptionPane.showMessageDialog(this, "Just For Fun"));
     }
 
@@ -72,9 +72,9 @@ public class MemoryGame extends JFrame {
         for (int i = 0; i < rows * cols; i++) {
             ButtonGame button = new ButtonGame();
             button.setFont(new Font("Arial", Font.BOLD, 24));
-            button.setIcon(gameManager.getImages().IconFactory(-1));
+            button.setIcon(memoryGameManager.getImages().IconFactory(-1));
             panelGrid.add(button);
-            gameManager.addButton(button);
+            memoryGameManager.addButton(button);
         }
         getContentPane().add(panelGrid, BorderLayout.CENTER);
         panelGrid.revalidate();
