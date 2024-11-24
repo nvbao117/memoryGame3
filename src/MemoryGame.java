@@ -1,5 +1,3 @@
-
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,9 +7,7 @@ public class MemoryGame extends JFrame {
     private JLabel labelTitle, labelTime;
     private GameManager gameManager;
 
-    /**
-     * @wbp.parser.entryPoint
-     */
+
     public MemoryGame() {
         super("Memory Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,7 +72,7 @@ public class MemoryGame extends JFrame {
         for (int i = 0; i < rows * cols; i++) {
             ButtonGame button = new ButtonGame();
             button.setFont(new Font("Arial", Font.BOLD, 24));
-            button.setIcon(gameManager.getImages().IconFactory(-1)); // Set initial icon to question mark
+            button.setIcon(gameManager.getImages().IconFactory(-1));
             panelGrid.add(button);
             gameManager.addButton(button);
         }

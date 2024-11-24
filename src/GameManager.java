@@ -36,14 +36,14 @@ public class GameManager {
         }
         Collections.shuffle(listShuffle);
     }
-
+	
     public void addButton(ButtonGame button) {
         int index = buttonMap.size();
         buttonMap.put(button, listShuffle.get(index));
         button.setIcon(images.IconFactory(-1));
         button.addActionListener(e -> handleButtonClick(button));
     }
-
+    
     private void handleButtonClick(ButtonGame button) {
         if (buttonMap.get(button) == 0 || button.equals(buttonFirstClicked) || button.equals(buttonSecondClicked)) {
             return;
