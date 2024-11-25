@@ -19,18 +19,19 @@ public class MemoryGameManager {
     private JLabel labelTitle;
     private JLabel labelTime;
     private int totalTime;
-
-    public MemoryGameManager(JLabel labelTitle, JLabel labelTime) {
+    private int countCard;
+    public MemoryGameManager(JLabel labelTitle, JLabel labelTime,int countCard) {
         buttonMap = new HashMap<>();
         images = new Images();
         intQtdOpened = 0;
         intCombined = 0;
         listShuffle = new ArrayList<>();
+        this.countCard = countCard ; 
         this.labelTitle = labelTitle;
         this.labelTime = labelTime;
-        totalTime = 120; // 2 minutes
+        totalTime = 120; 
 
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= countCard; i++) {
             listShuffle.add(i);
             listShuffle.add(i);
         }
@@ -74,7 +75,7 @@ public class MemoryGameManager {
                 buttonSecondClicked = null;
                 intCombined++;
 
-                if (intCombined >= 12) {
+                if (intCombined >= countCard) {
                     solve(true);
                 }
             } else {
@@ -137,7 +138,7 @@ public class MemoryGameManager {
         if (intQtdOpened == -1) return;
 
         intQtdOpened = -1;
-        intCombined = 12;
+        intCombined = countCard;
         buttonFirstClicked = null;
         buttonSecondClicked = null;
         if (timerHideButtons != null) {

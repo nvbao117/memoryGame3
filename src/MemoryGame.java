@@ -6,24 +6,33 @@ public class MemoryGame extends JFrame {
     private JButton buttonNew, buttonSolve, buttonAbout;
     private JLabel labelTitle, labelTime;
     private MemoryGameManager memoryGameManager;
-
-    public MemoryGame() {
+    private DifficultyLevel difficultyLevel;
+    public MemoryGame(DifficultyLevel difficultyLevel) {
         super("Memory Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout());
         setSize(800, 600); // Set default size
         setMinimumSize(new Dimension(800, 600)); // Set minimum size
 
-        initializeTitlePanel();
         initializeControlPanel();
-        initializeGridPanel(4, 6); // Default grid size
+        if (difficultyLevel == DifficultyLevel.EASY) {
+            initializeTitlePanel(4);
+            initializeGridPanel(2, 4); // Easy: 4x6 grid
+        } else if (difficultyLevel == DifficultyLevel.MEDIUM) {
+            initializeTitlePanel(12);
 
+            initializeGridPanel(4, 6); // Medium: 5x6 grid
+        } else if (difficultyLevel == DifficultyLevel.HARD) {
+            initializeTitlePanel(14);
+
+            initializeGridPanel(4, 7); // Hard: 6x8 grid
+        }
         pack();
         setVisible(true);
         memoryGameManager.startGameTimer();
     }
 
-    private void initializeTitlePanel() {
+    private void initializeTitlePanel(int countCard) {
         panelTitle = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -32,7 +41,6 @@ public class MemoryGame extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
 
-                // Gradient từ tím sang xanh dương
                 GradientPaint gradient = new GradientPaint(0, 0, new Color(123, 104, 238), width, 0, new Color(30, 144, 255));
                 g2d.setPaint(gradient);
                 g2d.fillRect(0, 0, width, height);
@@ -53,7 +61,7 @@ public class MemoryGame extends JFrame {
         panelTitle.setBorder(BorderFactory.createBevelBorder(1));
         getContentPane().add(panelTitle, BorderLayout.NORTH);
 
-        memoryGameManager = new MemoryGameManager(labelTitle, labelTime);
+        memoryGameManager = new MemoryGameManager(labelTitle, labelTime,countCard);
     }
 
     private void initializeControlPanel() {
@@ -152,7 +160,4 @@ public class MemoryGame extends JFrame {
         getContentPane().add(panelGrid, BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(MemoryGame::new);
-    }
 }

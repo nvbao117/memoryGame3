@@ -22,6 +22,7 @@ public class MenuGame extends JFrame {
 		initializeDifficultyPanel();
 		initializeControlPanel();
 		
+		setLocationRelativeTo(null);
 		pack();
 		setVisible(true);
 	}
@@ -49,7 +50,7 @@ public class MenuGame extends JFrame {
 	    Border innerBorder = BorderFactory.createEmptyBorder(20, 20, 20, 20); // Padding bên trong
 	    Border titledBorder = BorderFactory.createTitledBorder(
 	            outerBorder, 
-	            "Select Difficulty Level", 
+	            " Select Difficulty Level ", 
 	            0,
 	            0, 
 	            new Font("Arial", Font.BOLD, 20), 
@@ -122,11 +123,27 @@ public class MenuGame extends JFrame {
         button.addActionListener(e -> controlButtonAction(text));
         return button;
     }
+    private DifficultyLevel getSelectedDifficulty() {
+        if (rbEasy.isSelected()) {
+            return DifficultyLevel.EASY;
+        } else if (rbMedium.isSelected()) {
+            return DifficultyLevel.MEDIUM;
+        } else if (rbHard.isSelected()) {
+            return DifficultyLevel.HARD;
+        } else {
+            return null;  
+        }
+    }
 
 	private void controlButtonAction(String action) {
+		DifficultyLevel level = getSelectedDifficulty() ; 
 		switch (action) {
 		case "Start": {
-			menuManager.handleStart();
+			menuManager.handleStart(level);
+			break ; 
+		}
+		case "Best Score": {
+			menuManager.handleBestScore();
 			break ; 
 		}
 		default:

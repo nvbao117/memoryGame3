@@ -39,15 +39,20 @@ public class Images {
         Item item;
         int i = -1;
 
-        // undiscovered image
         item = new Item(i++, "images/ic_help_outline_black_18dp.png");
         mapa.put(item.intCod, item);
-
+        
+        
+        
+        
         // discovered image
         item = new Item(i++, "images/ic_done_black_18dp.png");
         mapa.put(item.intCod, item);
-
-        // other images...
+        
+        item = new Item(i++, "images/facebook.png");
+        mapa.put(item.intCod, item);
+        item = new Item(i++, "images/instagram.png");
+        mapa.put(item.intCod, item);
         item = new Item(i++, "images/ic_airport_shuttle_black_18dp.png");
         mapa.put(item.intCod, item);
         item = new Item(i++, "images/ic_all_inclusive_black_18dp.png");
