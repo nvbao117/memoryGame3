@@ -98,12 +98,8 @@ public class MenuGame extends JFrame {
 		panelControl.setBackground(new Color(245, 245, 245)); 
         panelControl.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         buttonStart = createControlButton("Start", new Color(50, 205, 50));
-        buttonBestScore = createControlButton("Best Score", new Color(255, 165, 0));
-        buttonResetAll = createControlButton("Reset All", new Color(220, 20, 60));
         buttonExit = createControlButton("Exit", new Color(169, 169, 169));
 		panelControl.add(buttonStart); 
-		panelControl.add(buttonBestScore); 
-		panelControl.add(buttonResetAll); 
 		panelControl.add(buttonExit);
 		
 		getContentPane().add(panelControl, BorderLayout.SOUTH);
@@ -135,22 +131,24 @@ public class MenuGame extends JFrame {
 		String level = getSelectedDifficulty() ; 
 		switch (action) {
 		case "Start": {
-			if(level == "EASY") {
-				new EasyGame("EASY");
-			}else if(level =="MEDIUM") {
-				new MediumGame("MEDIUM");
-			}else if(level == "HARD") {
-				new HardGame("HARD");
-			}else {
-                JOptionPane.showMessageDialog(this, "Please select a difficulty level.", "Warning", JOptionPane.WARNING_MESSAGE);
-                return;
-			}
+			this.dispose();
+			SwingUtilities.invokeLater(() -> {
+                if (level.equals("EASY")) {
+                    new EasyGame("EASY"); // Mở game Easy
+                } else if (level.equals("MEDIUM")) {
+                    new MediumGame("MEDIUM"); // Mở game Medium
+                } else if (level.equals("HARD")) {
+                    new HardGame("HARD"); // Mở game Hard
+                }
+            });
 			
 			break ; 
 		}
-		case "Best Score": {
-			break ; 
+		case "Exit":{
+			System.exit(0); 
+			break;
 		}
+		
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + action);
 		}

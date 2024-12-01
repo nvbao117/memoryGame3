@@ -122,11 +122,14 @@ public class EasyGame extends JFrame {
 		case "Play": {
 			 int round = selectedRound;
              String level = difficultyLevel;  
-             new MemoryGame(level,round);
+             this.dispose();
+             SwingUtilities.invokeLater(() -> new MemoryGame(level,round));
 			break ; 
 		}
 		case "Go Back": {
-			break ; 
+			this.dispose();
+	        SwingUtilities.invokeLater(() -> new MenuGame());
+			break;
 		}
 		case "Exit": {
 			System.exit(0); 
