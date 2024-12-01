@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
+import sounds.*;
 
 public class MemoryGameManager {
 
@@ -82,7 +83,7 @@ public class MemoryGameManager {
                 remainingTime = 180; // 3 minutes for MEDIUM
             }
             case HARD_LEVEL -> {  	
-            	timeDelay = 2000;
+            	timeDelay = 1500;
                 cardsToMatch = 4;
                 remainingTime = 240; // 4 minutes for HARD
             }
@@ -152,6 +153,7 @@ public class MemoryGameManager {
 
 
         if (isMatch) {
+        	sounds.SoundManager.playSound("src/sounds/match.wav");
         	clickedButtons.forEach(button -> {
                 button.setIcon(images.IconFactory(0)); // Show "matched" state
                 button.setEnabled(false); // Vô hiệu hóa nút
@@ -183,6 +185,13 @@ public class MemoryGameManager {
         clickedButtons.clear();
         stopTimers();
         revealAllCards();
+        if (isWin) {
+        	sounds.SoundManager.stopBackgroundMusic();
+        	sounds.SoundManager.playSound("src/sounds/win.wav");
+		}else {
+			sounds.SoundManager.stopBackgroundMusic();
+        	sounds.SoundManager.playSound("src/sounds/lose.wav");
+		}
         JOptionPane.showMessageDialog(null, isWin ? "Chúc mừng! Bạn đã thắng!" : "Game Over!");
     }
 
@@ -196,6 +205,7 @@ public class MemoryGameManager {
         timeLabel.setText(String.format("⏳ Thời gian còn lại: %d giây", remainingTime));
         if (remainingTime <= 0) {
             gameTimer.stop();
+        	sounds.SoundManager.playSound("src/sounds/lose.wav");
             JOptionPane.showMessageDialog(null, "Hết giờ! Game Over.");
             endGame(false);
         }

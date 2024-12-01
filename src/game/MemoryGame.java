@@ -2,7 +2,7 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
-
+import sounds.*;
 public class MemoryGame extends JFrame {
     private JPanel panelTitle, panelGrid, panelControl;
     private JButton buttonNew, buttonSolve, buttonAbout;
@@ -100,7 +100,7 @@ public class MemoryGame extends JFrame {
                 initializeGridPanel(5, 4);
                 break;
             case 2:
-                initializeTitlePanel(25);
+                initializeTitlePanel(24);
                 initializeGridPanel(6, 4);
                 break;
             default:
@@ -164,7 +164,9 @@ public class MemoryGame extends JFrame {
             button.setBackground(fixedColor);
             button.setOpaque(true);
             button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
+            button.addActionListener(e -> {
+            	sounds.SoundManager.playSound("src/sounds/flip.wav") ; 
+            });
             button.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
                     button.setBackground(new Color(200, 200, 200));
@@ -208,9 +210,19 @@ public class MemoryGame extends JFrame {
 
         getContentPane().add(panelControl, BorderLayout.SOUTH);
 
-        buttonNew.addActionListener(e -> memoryGameManager.startNewGame());
-        buttonSolve.addActionListener(e -> memoryGameManager.revealAllCards());
-        buttonAbout.addActionListener(e -> JOptionPane.showMessageDialog(this, "Just For Fun"));
+        buttonNew.addActionListener(e -> {
+        	sounds.SoundManager.playSound("src/sounds/click.wav") ; 
+        	memoryGameManager.startNewGame();
+        	
+        });
+        buttonSolve.addActionListener(e -> {
+        	sounds.SoundManager.playSound("src/sounds/click.wav") ; 
+        	memoryGameManager.revealAllCards();
+        });
+        buttonAbout.addActionListener(e -> {
+        	sounds.SoundManager.playSound("src/sounds/click.wav") ; 
+        	JOptionPane.showMessageDialog(this, "Just For Fun");
+        });
     }
 
     private JButton createControlButton(String text, Color bgColor) {

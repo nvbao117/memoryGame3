@@ -1,11 +1,14 @@
 package gameLevel;
 import javax.swing.*;
 
+
 import game.MemoryGame;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 import menuGame.*;
+
+import sounds.*;
 public class EasyGame extends JFrame {
     private ButtonGroup roundButtonGroup; 
     private int selectedRound = 1;  
@@ -64,6 +67,7 @@ public class EasyGame extends JFrame {
         roundButton.setActionCommand(roundValue);  // Gán số vào ActionCommand
 
         roundButton.addActionListener(e -> {
+			sounds.SoundManager.playSound("src/sounds/flip.wav");
         	try {
                 // Lấy giá trị từ ActionCommand và chuyển thành int
                 selectedRound = Integer.parseInt(roundButton.getActionCommand());
@@ -100,8 +104,11 @@ public class EasyGame extends JFrame {
         button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
         button.setPreferredSize(new Dimension(120, 40));
-        button.addActionListener(e -> controlButtonAction(text));
+        button.addActionListener(e -> {
+        	sounds.SoundManager.playSound("src/sounds/click.wav");
+        	controlButtonAction(text);
 
+        });
         // Hiệu ứng hover
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override

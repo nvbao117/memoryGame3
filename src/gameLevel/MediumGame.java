@@ -66,6 +66,7 @@ public class MediumGame extends JFrame {
 		roundButton.setActionCommand(roundValue); // Gán số vào ActionCommand
 
 		roundButton.addActionListener(e -> {
+			sounds.SoundManager.playSound("src/sounds/flip.wav");
 			try {
 				// Lấy giá trị từ ActionCommand và chuyển thành int
 				selectedRound = Integer.parseInt(roundButton.getActionCommand());

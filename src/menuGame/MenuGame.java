@@ -1,11 +1,13 @@
 package menuGame;
 import javax.swing.*;
+
 import javax.swing.border.Border;
 
 import gameLevel.MediumGame;
-
 import java.awt.*;
 import gameLevel.*;
+
+import sounds.*;
 public class MenuGame extends JFrame {
 	private JPanel panelTitle, panelDifficulty, panelControl;
 	private JRadioButton rbEasy, rbMedium, rbHard;
@@ -65,6 +67,10 @@ public class MenuGame extends JFrame {
 	    rbEasy = createDifficultyRadioButton("Easy", new Color(144, 238, 144));
 	    rbMedium = createDifficultyRadioButton("Medium", new Color(255, 223, 186));
 	    rbHard = createDifficultyRadioButton("Hard", new Color(255, 99, 71));
+	    
+        rbEasy.addActionListener(e -> sounds.SoundManager.playSound("src/sounds/flip.wav"));
+        rbMedium.addActionListener(e ->  sounds.SoundManager.playSound("src/sounds/flip.wav"));
+        rbHard.addActionListener(e ->  sounds.SoundManager.playSound("src/sounds/flip.wav"));
 
 	    difficultyGroup.add(rbEasy);
 	    difficultyGroup.add(rbMedium);
@@ -112,7 +118,10 @@ public class MenuGame extends JFrame {
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         button.setPreferredSize(new Dimension(120, 40));
-        button.addActionListener(e -> controlButtonAction(text));
+        button.addActionListener(e -> {
+        	sounds.SoundManager.playSound("src/sounds/click.wav");
+        	controlButtonAction(text);
+        });
         return button;
     }
     private String getSelectedDifficulty() {
