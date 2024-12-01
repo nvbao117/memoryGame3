@@ -1,3 +1,4 @@
+package game;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,14 +42,12 @@ public class Images {
 
         item = new Item(i++, "images/ic_help_outline_black_18dp.png");
         mapa.put(item.intCod, item);
-        
-        
-        
-        
+                	
         // discovered image
         item = new Item(i++, "images/ic_done_black_18dp.png");
         mapa.put(item.intCod, item);
         
+     
         item = new Item(i++, "images/facebook.png");
         mapa.put(item.intCod, item);
         item = new Item(i++, "images/instagram.png");
