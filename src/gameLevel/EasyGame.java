@@ -13,7 +13,6 @@ public class EasyGame extends JFrame {
     private ButtonGroup roundButtonGroup; 
     private int selectedRound = 1;  
     private String difficultyLevel;
-   // MenuManager menuManager
     public EasyGame(String difficultyLevel) {
         setTitle("Memory Game - Difficulty: " + difficultyLevel);
 //        this.menuManager = menuManager;

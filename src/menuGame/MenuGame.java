@@ -83,6 +83,7 @@ public class MenuGame extends JFrame {
 
 	    getContentPane().add(panelDifficulty, BorderLayout.CENTER);
 	}
+	
 	private JRadioButton createDifficultyRadioButton(String text, Color color) {
 	    JRadioButton radioButton = new JRadioButton(text);
 	    radioButton.setFont(new Font("Arial", Font.BOLD, 20)); // Font lớn và đậm
